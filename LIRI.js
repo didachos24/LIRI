@@ -2,49 +2,50 @@ require("dotenv").config();
 
 var keys = require("./keys.js");
 
+var spotify = new Spotify(keys.spotify);
+
+console.log("here ok")
+
 // var order = process.argv[3];
 
 // --------------------------------------------------------------------------------------
 
 
-  var concert = require("axios");
-  var artist = process.argv[3];
-
-  concert.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp").then(function(response) {
-    console.log(response.data);
-  });
 
 
 // --------------------------------------------------------------------------------------
 
 // switch(order) {
 //   case concert:
+// // Problems accessing the object to display nearest event
 
-//   var concert = require("axios");
 
-//   concert.get("https://rest.bandsintown.com/artists/" + process.argv[3] + "/events?app_id=codingbootcamp").then(function(response) {
-//     console.log(response.data);
-//   });
-  
+// var concert = require("axios");
+
+// var artist = process.argv[3];
+
+// concert.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp").then(function(response) {
+//   console.log(response.data);
+// });
+
 //   break;
 
 //   case spotify:
 
-//   var spotify = new spotify(keys.spotify);
+var song = process.argv[3];
 
-//   var spotify = require("node-spotify-api");
+var spotify = require("node-spotify-api");
 
-//   spotify.search({ type: 'track', query: process.argv[3]}, function(err, data) {
-//     if (err) {
-//       return console.log('Error occurred: ' + err);
-//     }
-  
-//   console.log(data); 
-//   });
+spotify.search({ type: 'track', query: song}, function(err, data) { if (err) {
+    return console.log('Error occurred: ' + err);
+  }
 
-//   break;
+  console.log(data); 
+});
 
-//   case movie:
+// break;
+
+//  case movie:
 
 // var movie = require("axios");
 
@@ -61,6 +62,8 @@ var keys = require("./keys.js");
 // })
 
 // break;
+
+// case "do-what-it-says":
 
 // }
 
