@@ -2,9 +2,9 @@ require("dotenv").config();
 
 var keys = require("./keys.js");
 
-var spotify = new Spotify(keys.spotify);
+var Spotify = require('node-spotify-api');
 
-console.log("here ok")
+var spotify = new Spotify(keys.spotify);
 
 // var order = process.argv[3];
 
@@ -34,13 +34,16 @@ console.log("here ok")
 
 var song = process.argv[3];
 
-var spotify = require("node-spotify-api");
+if(!song) {
+  song = "The sign";
+  artist = "Ace of Base";
+}
 
-spotify.search({ type: 'track', query: song}, function(err, data) { if (err) {
+spotify.search({ type: 'track', query: song, limit: '1'}, function(err, data) { if (err) {
     return console.log('Error occurred: ' + err);
   }
+    console.log("================ Song =================\nArtist(s): "+data.tracks.items[0].artists[0].name+"\nSong's name: "+data.tracks.items[0].name+"\nLink from Spotify: "+data.tracks.items[0].external_urls.spotify+"\nAlbum: "+data.tracks.items[0].album.name);
 
-  console.log(data); 
 });
 
 // break;
